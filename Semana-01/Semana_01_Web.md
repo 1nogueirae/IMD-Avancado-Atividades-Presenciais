@@ -3,6 +3,7 @@
 **Aluno:** Emanuel Lucas Nogueira da Silva.\
 **Matrícula:** 20253002434.\
 **Turma:** 03
+**Github**: 1nogueirae
 
 ## Banco de dados.
 
