@@ -53,7 +53,7 @@ Dois brasileiros diferentes podem ter o mesmo nome, porém os seus CPFs serão d
 
 #### Resposta
 
-Uma chave estrangeira é utilizada para casos de atributos multivalorados. Neste cenário, cria-se uma tabela somente para armazenar os valores e se conecta as duas tabelas por meio de uma chave estrangeira com associação a chave primária da tabela principal.
+A Chave Estrangeira é o mecanismo que estabelece o relacionamento entre duas tabelas, garantindo a integridade referencial. Ela não serve apenas para multivalorados, mas para conectar qualquer entidade (ex: um Pedido que referencia um Cliente). Sem a FK, você tem tabelas isoladas; com ela, você tem um banco relacional.    
 
 ### EXERCÍCIO 5
 
@@ -111,5 +111,21 @@ Desvantagens: É péssimo para tarefas CPU-bound (processamento de dados pesado 
 #### Resposta
 
 ```javascript
+const http = require('http');
+const fs = require('fs');
 
+http.createServer((req, res) => {
+    const filename = (req.method === 'GET' && req.url === '/') ? 'index.html' : '404.html';
+    const status = filename === 'index.html' ? 200 : 404;
+    
+    fs.readFile(filename, (err, data) => {
+        if (err) {
+            res.writeHead(500);
+            return res.end('Erro ao ler arquivo');
+        }
+        res.writeHead(status, { 'Content-Type': 'text/html; charset=utf-8' });
+        res.end(data);
+    });
+
+}).listen(8080);
 ```
