@@ -1,0 +1,31 @@
+GET http://localhost:8080/produtos
+
+###
+
+POST http://localhost:8080/produtos
+Content-Type: application/json
+
+{
+    "nome": "controle",
+    "descricao": "controle de tv",
+    "preço": "9,99"
+}
+
+###
+
+PUT http://localhost:8080/produtos/12df5524-6ccd-4910-960c-8008c5470321
+Content-Type: application/json
+
+{
+    "nome": "sofa cama",
+    "descricao": "um sofa que vira cama",
+    "preço": "115"
+}
+
+
+###
+
+DELETE http://localhost:8080/produtos/a2031076-692a-4dda-9664-da7653ace7e4
+
+###
+
