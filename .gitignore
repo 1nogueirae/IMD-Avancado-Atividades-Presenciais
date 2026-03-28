@@ -1,0 +1,14 @@
+# Dependencias Node.js (qualquer nivel)
+node_modules/
+**/node_modules/
+
+# Arquivos de banco de dados
+*.db
+*.sqlite
+*.sqlite3
+*.sql
+*.mwb
+
+# Variaveis de ambiente
+.env
+*.env
