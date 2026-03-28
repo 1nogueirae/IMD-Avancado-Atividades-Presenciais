@@ -1,0 +1,46 @@
+GET http://localhost:8080/produto
+
+###
+
+
+PUT http://localhost:8080/produto/2
+Content-Type: application/json
+
+{
+    "nome": "Mouse Gamer",
+    "descricao": "Mouse com alta precisao",
+    "preco": 12000,
+    "tags": ["pro", "aspas"]
+}
+###
+
+POST http://localhost:8080/produto
+Content-Type: application/json
+
+{
+    "nome": "Mouse Gamer",
+    "descricao": "Mouse com alta precisao",
+    "preco": 149.9,
+    "tags": []
+}
+
+
+###
+
+PUT http://localhost:8080/produto/1
+Content-Type: application/json
+
+{
+    "nome": "sofa cama",
+    "descricao": "um sofa que vira cama",
+    "preco": 115,
+    "tags": ["sala", "conforto"]
+}
+
+
+###
+
+DELETE http://localhost:8080/produto/1
+
+###
+
