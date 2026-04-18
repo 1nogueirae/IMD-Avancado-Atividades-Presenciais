@@ -1,0 +1,12 @@
+{
+  "name": "semana-07-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "winston": "^3.17.0"
+  }
+}
