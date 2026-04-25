@@ -1,0 +1,154 @@
+openapi: 3.0.3
+info:
+  title: API de Usuarios
+  version: 1.0.0
+  description: API simples para cadastro e listagem de usuarios em memoria.
+
+servers:
+  - url: http://localhost:3000
+    description: Servidor local
+
+tags:
+  - name: Users
+    description: Operacoes de usuarios
+
+paths:
+  /users:
+    get:
+      tags:
+        - Users
+      summary: Listar usuarios
+      description: Retorna todos os usuarios cadastrados em memoria.
+      responses:
+        '200':
+          description: Lista de usuarios retornada com sucesso.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  users:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/User'
+                required:
+                  - users
+              examples:
+                sucesso:
+                  value:
+                    users:
+                      - id: 1
+                        name: Tesla da Silva
+                        email: tesla@gmail.com
+                        password: Model S
+
+    post:
+      tags:
+        - Users
+      summary: Cadastrar usuario
+      description: Cadastra um novo usuario apos validacao dos dados.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserInput'
+            examples:
+              exemplo:
+                value:
+                  name: Tesla da Silva
+                  email: tesla@gmail.com
+                  password: Model S
+      responses:
+        '200':
+          description: Usuario adicionado com sucesso.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: Usuario adicionado com sucesso.
+                required:
+                  - msg
+        '400':
+          description: Dados invalidos.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationErrorResponse'
+              examples:
+                dadosInvalidos:
+                  value:
+                    msg: Dados inválidos
+                    errors:
+                      - instancePath: /email
+                        schemaPath: '#/properties/email/format'
+                        keyword: format
+                        params:
+                          format: email
+                        message: must match format "email"
+
+components:
+  schemas:
+    UserInput:
+      type: object
+      additionalProperties: false
+      properties:
+        name:
+          type: string
+          example: Tesla da Silva
+        email:
+          type: string
+          format: email
+          example: tesla@gmail.com
+        password:
+          type: string
+          example: Model S
+      required:
+        - name
+        - email
+        - password
+
+    User:
+      allOf:
+        - $ref: '#/components/schemas/UserInput'
+        - type: object
+          properties:
+            id:
+              type: integer
+              minimum: 1
+              example: 1
+          required:
+            - id
+
+    ValidationErrorItem:
+      type: object
+      additionalProperties: true
+      properties:
+        instancePath:
+          type: string
+        schemaPath:
+          type: string
+        keyword:
+          type: string
+        params:
+          type: object
+          additionalProperties: true
+        message:
+          type: string
+
+    ValidationErrorResponse:
+      type: object
+      properties:
+        msg:
+          type: string
+          example: Dados inválidos
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationErrorItem'
+      required:
+        - msg
+        - errors
